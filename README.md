@@ -5,7 +5,7 @@
 # Game
 Welcome to Particles, a game of speed and accuracy.
 
- [Play this game](https://xdotdex.github.io/game)
+ [Play this game](https://xdotdex.github.io/Game)
 
  **How to play**
  
