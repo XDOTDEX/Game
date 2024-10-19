@@ -1,0 +1,945 @@
+/* global css variables */
+:root {
+  --how-color: rgba(249, 133, 70, 0.7);
+  --scores-color: rgba(46, 191, 158, 0.7);
+  --game-color: rgba(170, 145, 224, 0.7);
+  --play-color: rgba(30, 152, 166, 0.8);
+  --special-color: rgba(173, 168, 28, 0.7);
+}
+
+body{
+  text-align: center;
+  margin:0;
+  padding:0;
+  font-family: 'Handlee', cursive;
+  font-size:18px;
+  color: rgba(255, 255, 255, 0.75);
+  background: radial-gradient(rgb(48, 17, 17) 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+  background-color: rgba(40, 40, 40, 0.95);
+  background-size:16px 16px;
+  background-attachment: fixed;
+}
+
+/* top navigation */
+#header {
+  font-size: 45px;
+}
+header nav {
+  position: fixed;
+  cursor: pointer;
+  top: 0px;
+  height:auto;
+  padding:0px;
+  width: 100%;
+  transition: transform 0.6s;
+  z-index:20;
+}
+header nav.begone {
+  transform: translate3d(0, -100%, 0);
+}
+nav button{
+  position:absolute;
+  width:100%;
+  left:0;
+  background-color: rgb(51, 50, 51);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  border: none;
+  font-size: 17px;
+  transition: background-color 0.3s, opacity 0.3s linear;
+  outline: none;
+  height:40px;
+  
+}
+#homeButton {
+  background-color: rgba(222, 85, 88, 0.7);
+  left:0;
+  width:50px;
+}
+#howButton {
+  background-color: var(--how-color);
+  left:50px;
+  width: calc((100% - 50px) / 3);
+}
+#scoresButton {
+  background-color: var(--scores-color);
+  left: calc(((100% - 50px) / 3) + 50px);
+  width: calc((100% - 50px) / 3);
+}
+#gameButton {
+  background-color: var(--game-color);
+  left: calc(((100% - 50px) / 3 * 2) + 50px);
+  width: calc((100% - 50px) / 3);
+}
+button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+button.active {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+button {
+  font-family: 'Handlee', cursive;
+}
+
+/* handles the page transitions */
+.showPage{
+  -webkit-animation: showPage 2s ease forwards;
+  -moz-animation: showPage 2s ease forwards;
+  -o-animation: showPage 2s ease forwards;
+  animation: showPage 2s ease forwards;
+}
+
+/* style of main content */
+#content {
+  margin-top:40px;
+  padding: 10px;
+}
+#content h1 {
+  margin-top:30px;
+  font-size:65px;
+  font-family: 'Indie Flower', cursive;
+  margin-bottom:0px;
+  color: rgba(255, 255, 255, 0.25);
+}
+#content #how article {
+  margin-top: 60px;
+}
+
+/* styling of the wolves */
+.wolves div {
+  position: absolute;
+  width:100px;
+  height:90px;
+}
+.wolves .top-left {
+  top: 60px;
+  left: 20px;
+  -webkit-animation: wolf-rotate 4s linear infinite;
+  -moz-animation: wolf-rotate 4s linear infinite;
+  -o-animation: wolf-rotate 4s linear infinite;
+  animation: wolf-rotate 4s linear infinite;
+}
+.wolves .top-right {
+  top: 60px;
+  left: calc(100% - 120px);
+  -webkit-animation: wolf-rotate 4s linear -2s infinite;
+  -moz-animation: wolf-rotate 4s linear -2s infinite;
+  -o-animation: wolf-rotate 4s linear -2s infinite;
+  animation: wolf-rotate 4s linear -2s infinite;
+}
+.wolf div {
+  position: absolute;
+}
+.wolf .wolf-head {
+  width: 0;
+  height: 0;
+  top: 0px;
+  left: 0px;
+  border-style: solid;
+  border-width: 90px 50px 0 50px;
+  border-color: #888 transparent transparent transparent;
+  border-radius:100%;
+  -webkit-animation: wolf-head-change 4s linear infinite;
+  -moz-animation: wolf-head-change 4s linear infinite;
+  -o-animation: wolf-head-change 4s linear infinite;
+  animation: wolf-head-change 4s linear infinite;
+}
+.wolf .wolf-ear-left {
+  width: 0;
+  height: 0;
+  top: -20px;
+  left: 10px;
+  border-style: solid;
+  border-width: 0 15px 40px 15px;
+  border-color: transparent transparent #888 transparent;
+  transform: rotate(-20deg);
+}
+.wolf .wolf-ear-right {
+  width: 0;
+  height: 0;
+  top: -20px;
+  left: 60px;
+  border-style: solid;
+  border-width: 0 15px 40px 15px;
+  border-color: transparent transparent #888 transparent;
+  transform: rotate(20deg);
+}
+.wolf .wolf-eye-left {
+  width: 0;
+  height: 0;
+  top: 25px;
+  left: 60px;
+  border-style: solid;
+  border-width: 18px 14px 0 0;
+  border-color: #444 transparent transparent transparent;
+  transform: skew(-15deg);
+}
+.wolf .wolf-eye-right {
+  width: 0;
+  height: 0;
+  top: 25px;
+  left: 25px;
+  border-style: solid;
+  border-width: 0 14px 18px 0;
+  border-color: transparent #444 transparent transparent;
+  transform: skew(15deg);
+}
+.wolf .wolf-eyeball-left {
+  width: 5px;
+  height: 5px;
+  top: 27px;
+  left: 63px;
+  background-color: rgb(255, 255, 255);
+  border-radius:50%;
+}
+.wolf .wolf-eyeball-right {
+  width: 5px;
+  height: 5px;
+  top: 27px;
+  left: 31px;
+  background-color: rgb(255, 255, 255);
+  border-radius:50%;
+}
+.wolf .wolf-nose {
+  width: 0;
+  height: 0;
+  top: 72px;
+  left: 45px;
+  border-style: solid;
+  border-width: 12px 5px 0 5px;
+  border-color: #444444 transparent transparent transparent;
+}
+
+/* styling of the box on the home page */
+#box {
+  padding: 20px;
+  width: 300px;
+  height:275px;
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 0px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+  background-color: rgba(92, 91, 92, 0.4);
+}
+#box #creator {
+  opacity: 0.5;
+  font-size: 16px;
+}
+#box .home-buttons {
+  width: 100px;
+  height: 100px;
+  margin: 20px 10px;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s, opacity 0.3s linear, border-radius 0.4s ease-out;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+}
+#box #homeHowButton {
+  background-color: var(--how-color);
+  border-radius: 0 40px;
+  -webkit-animation: rotate 1.5s ease-out 1.5s forwards;
+  -moz-animation: rotate 1.5s ease-out 1.5s forwards;
+  -o-animation: rotate 1.5s ease-out 1.5s forwards;
+  animation: rotate 1.5s ease-out 1.5s forwards;
+}
+#box #homePlayButton {
+  background-color: var(--game-color);
+  border-radius: 40px 0;
+  -webkit-animation: rotate 1.5s ease-in 1.5s reverse forwards;
+  -moz-animation: rotate 1.5s ease-in 1.5s reverse forwards;
+  -o-animation: rotate 1.5s ease-in 1.5s reverse forwards;
+  animation: rotate 1.5s ease-in 1.5s reverse forwards;
+}
+#box .home-buttons:hover, #box #homeHowButton:hover, #box #homePlayButton:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  border-radius: 100%;
+}
+#box #welcome {
+  font-size: 20px;
+}
+
+/* styling of the text on the how page */
+#how .line {
+  position: relative;
+  margin: 0 auto;
+  white-space: nowrap;
+  line-height: 40px;
+  overflow: hidden;
+  opacity: 0;
+}
+#how .line-1 {
+  -webkit-animation: fadein 1s ease-in 1.5s forwards;
+  -moz-animation: fadein 1s ease-in 1.5s forwards;
+  -o-animation: fadein 1s ease-in 1.5s forwards;
+  animation: fadein 1s ease-in 1.5s forwards;
+}
+#how .line-2 {
+  -webkit-animation: fadein 1s ease-in 3.5s forwards;
+  -moz-animation: fadein 1s ease-in 3.5s forwards;
+  -o-animation: fadein 1s ease-in 3.5s forwards;
+  animation: fadein 1s ease-in 3.5s forwards;
+}
+#how .line-3 {
+  -webkit-animation: fadein 1s ease-in 5.5s forwards;
+  -moz-animation: fadein 1s ease-in 5.5s forwards;
+  -o-animation: fadein 1s ease-in 5.5s forwards;
+  animation: fadein 1s ease-in 5.5s forwards;
+}
+#how .line-4 {
+  -webkit-animation: fadein 1s ease-in 7.5s forwards;
+  -moz-animation: fadein 1s ease-in 7.5s forwards;
+  -o-animation: fadein 1s ease-in 7.5s forwards;
+  animation: fadein 1s ease-in 7.5s forwards;
+}
+#how .line-5 {
+  -webkit-animation: fadein 1s ease-in 9.5s forwards;
+  -moz-animation: fadein 1s ease-in 9.5s forwards;
+  -o-animation: fadein 1s ease-in 9.5s forwards;
+  animation: fadein 1s ease-in 9.5s forwards;
+}
+#how .line-6 {
+  -webkit-animation: fadein 1s ease-in 9.5s forwards;
+  -moz-animation: fadein 1s ease-in 9.5s forwards;
+  -o-animation: fadein 1s ease-in 9.5s forwards;
+  animation: fadein 1s ease-in 9.5s forwards;
+}
+#how .particle-gold {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  opacity: 0;
+  margin-top: 20px;
+  -webkit-animation: fadein 1s ease-in 11s forwards, rotate 2s linear infinite;
+  -moz-animation: fadein 1s ease-in 11s forwards, rotate 2s linear infinite;
+  -o-animation: fadein 1s ease-in 11s forwards, rotate 2s linear infinite;
+  animation: fadein 1s ease-in 11s forwards, rotate 2s linear infinite;
+}
+
+/* styling of the high scores table */
+.table-scores {
+  width: 275px;
+  border: solid 0px;
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0 7px;
+  line-height: 20px;
+  margin: auto;
+  margin-top: 30px;
+  opacity: 0;
+  -webkit-animation: fadein 1.5s ease-out 2s forwards;
+  -moz-animation: fadein 1.5s ease-out 2s forwards;
+  -o-animation: fadein 1.5s ease-out 2s forwards;
+  animation: fadein 1.5s ease-out 2s forwards;
+}
+.table-scores th {
+  color: rgba(50, 135, 168, 0.8);
+}
+.table-scores td {
+  font-size: 14px;
+  line-height: 20px;
+  border-bottom: 1px solid rgba(220, 220, 220, 0.2);
+}
+.scores-header-name, .scores-name {
+  text-align:left;
+}
+.scores-header-score, .scores-score {
+  text-align: right;
+}
+
+/* styling of the game */
+#game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#game .game-title {
+  padding-top: 50px;
+  font-size: 60px;
+  color: rgba(200, 200, 200, 0.15);
+}
+#gameComponents {
+  display: none;
+}
+#gameComponents .game-score {
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+  font-size: 60px;
+  color: rgba(200, 200, 200, 0.2);
+  opacity: 0;
+  z-index: -1;
+  position: relative;
+  transition: opacity 0.3s linear;
+  -webkit-animation: fadein 1.5s ease-in forwards;
+  -moz-animation: fadein 1.5s ease-in forwards;
+  -o-animation: fadein 1.5s ease-in forwards;
+  animation: fadein 1.5s ease-in forwards;
+}
+#gameComponents #gameTimer {
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+  font-size: 50px;
+  color: rgba(200, 200, 200, 0.2);
+  opacity: 0;
+  z-index: -1;
+  position: relative;
+  transition: opacity 0.3s linear;
+  -webkit-animation: fadein 1.5s ease-in forwards;
+  -moz-animation: fadein 1.5s ease-in forwards;
+  -o-animation: fadein 1.5s ease-in forwards;
+  animation: fadein 1.5s ease-in forwards;
+}
+#gameScore, #gameScoreBest {
+  margin: auto;
+  text-align: center;
+  font-size: 60px;
+  color: rgba(200, 200, 200, 0.15);
+  opacity: 0;
+}
+#gameScore {
+  margin-top: 120px;
+  opacity: 0;
+  -webkit-animation: show-scores 0.75s forwards 0.25s;
+  -moz-animation: show-scores 0.75s forwards 0.25s;
+  -o-animation: show-scores 0.75s forwards 0.25s;
+  animation: show-scores 0.75s forwards 0.25s;
+}
+#gameScoreBest {
+  opacity: 0;
+  -webkit-animation: show-scores 0.75s forwards 1s;
+  -moz-animation: show-scores 0.75s forwards 1s;
+  -o-animation: show-scores 0.75s forwards 1s;
+  animation: show-scores 0.75s forwards 1s;
+}
+#gameStartButton, #gameReplayButton {
+  position: absolute;
+  left: calc(50% - 75px);
+  top: calc(50%);
+  margin: auto;
+  background-color: var(--play-color);
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+  transition: background-color 0.3s, opacity 0.3s linear;
+}
+#gameReplayButton {
+  top: calc(60%);
+  opacity: 0;
+  -webkit-animation: spin 1.5s forwards 2s;
+  -moz-animation: spin 1.5s forwards 2s;
+  -o-animation: spin 1.5s forwards 2s;
+  animation: spin 1.5s forwards 2s;
+}
+#gameStartButton:hover, #gameReplayButton:hover {
+  opacity: 0.8 !important;
+}
+
+/* styling of the particles */
+#particle-box {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.particle {
+  position:absolute;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+.particle-red, .bit-red {
+  background-color: rgb(63, 6, 221);
+}
+.particle-green, .bit-green {
+  background-color: rgb(245, 1, 1);
+}
+.particle-blue, .bit-blue {
+  background-color: rgb(0, 255, 55);
+}
+.particle-gold, .bit-gold {
+  background-color: var(--special-color);
+  border-radius: 30% 0;
+}
+div.particle:hover {
+  cursor: pointer;
+  width: 150px !important;
+  height: 150px !important;
+  opacity: 0.5 !important;
+  -webkit-animation-play-state: paused !important;
+  -moz-animation-play-state: paused !important;
+  -o-animation-play-state: paused !important;
+  animation-play-state: paused !important;
+}
+
+/* styling of the explosions when you click a particle */
+.explosion {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+.bit {
+  position: absolute; 
+  width: 10px;
+  height: 10px;
+  -webkit-animation: pop 1.5s ease-in reverse forwards;
+  -moz-animation: pop 1.5s ease-in reverse forwards;
+  -o-animation: pop 1.5s ease-in reverse forwards;
+  animation: pop 1.5s ease-in reverse forwards;
+}
+
+@-webkit-keyframes showPage {
+  from {
+    opacity:0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+@-moz-keyframes showPage {
+  from {
+    opacity:0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+@-o-keyframes showPage {
+  from {
+    opacity:0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+@keyframes showPage {
+  from {
+    opacity:0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes wolf-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@-moz-keyframes wolf-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@-o-keyframes wolf-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes wolf-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes wolf-head-change {
+  0% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+  20% {
+    border-color: #2EBF9E transparent transparent transparent;
+  }
+  40% {
+    border-color: #218F76 transparent transparent transparent;
+  }
+  60% {
+    border-color: #0091e0 transparent transparent transparent;
+  }
+  80% {
+    border-color: #f3554a transparent transparent transparent;
+  }
+  100% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+}
+@-moz-keyframes wolf-head-change {
+  0% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+  20% {
+    border-color: #2EBF9E transparent transparent transparent;
+  }
+  40% {
+    border-color: #218F76 transparent transparent transparent;
+  }
+  60% {
+    border-color: #0091e0 transparent transparent transparent;
+  }
+  80% {
+    border-color: #f3554a transparent transparent transparent;
+  }
+  100% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+}
+@-o-keyframes wolf-head-change {
+  0% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+  20% {
+    border-color: #2EBF9E transparent transparent transparent;
+  }
+  40% {
+    border-color: #218F76 transparent transparent transparent;
+  }
+  60% {
+    border-color: #0091e0 transparent transparent transparent;
+  }
+  80% {
+    border-color: #f3554a transparent transparent transparent;
+  }
+  100% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+}
+@keyframes wolf-head-change {
+  0% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+  20% {
+    border-color: #2EBF9E transparent transparent transparent;
+  }
+  40% {
+    border-color: #218F76 transparent transparent transparent;
+  }
+  60% {
+    border-color: #0091e0 transparent transparent transparent;
+  }
+  80% {
+    border-color: #f3554a transparent transparent transparent;
+  }
+  100% {
+    border-color: #F98546 transparent transparent transparent;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+@-moz-keyframes spin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+@keyframes spin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes show-scores {
+  from {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes show-scores {
+  from {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes show-scores {
+  from {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+@keyframes show-scores {
+  from {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes move {
+  0% {
+    transform: translateY(500px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px)  rotate(360deg);
+    opacity: 0;
+  }
+}
+@-moz-keyframes move {
+  0% {
+    transform: translateY(500px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px)  rotate(360deg);
+    opacity: 0;
+  }
+}
+@-o-keyframes move {
+  0% {
+    transform: translateY(500px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px)  rotate(360deg);
+    opacity: 0;
+  }
+}
+@keyframes move {
+  0% {
+    transform: translateY(500px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px)  rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes pop {
+  from {
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}
+@-moz-keyframes pop {
+  from {
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}
+@-o-keyframes pop {
+  from {
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}
+@keyframes pop {
+  from {
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,163 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Particles (Game)</title>
+        <link 
+        href="https://fonts.googleapis.com/css?family=Indie+Flower|Material+Icons|Handlee&display=swap" 
+        rel="stylesheet">
+       <link rel="stylesheet" href="css/style.css"> 
+
+    </head>
+    <body>
+        <header>
+            <nav>
+                <button id="homeButton" onClick="switchPage('#home');" class="active material-icons">house</button>
+                <button id="howButton" onClick="switchPage('#how');">How To Play</button>
+                <button id="scoresButton" onClick="switchPage('#scores');">High Scores</button>
+                <button id="gameButton" onClick="switchPage('#game');">Play</button>
+            </nav>
+            <img src="https://i.postimg.cc/NFKKKsSn/headphones.png" style="position: fixed;z-index: 10001;top:30px;right:30px;" onclick="let m = document.querySelector('.song-audio-autoplay'); if (m.paused ) {m.play(); this.className = 'rotateImages'} else {m.pause(); this.className = ''}">
+            <audio class="song-audio-autoplay" controls loop style="display: none;visibility: hidden">
+                <source src="./dex/Dex.mp3" type="audio/mp3"/>
+            </audio>
+            <style type="text/css">
+                .rotateImages{
+                    -webkit-animation:myRotate 10s linear infinite;
+                    animation:myRotate 10s linear infinite;
+                }
+                @-webkit-keyframes myRotate{
+                    0%{ -webkit-transform: rotate(0deg);}
+                    50%{ -webkit-transform: rotate(180deg);}
+                    100%{ -webkit-transform: rotate(360deg);}
+                }
+                @keyframes myRotate{
+                    0%{ -webkit-transform: rotate(0deg);}
+                    50%{ -webkit-transform: rotate(180deg);}
+                    100%{ -webkit-transform: rotate(360deg);}
+                }
+            </style>
+        </header> <!--Navigation-->
+        <div id="content">
+            <div id="home" class="page"> <!--Home Page-->
+                <div class="wolves">
+                    <div class="wolf top-left">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                    <div class="wolf top-right">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                </div> <!--Wolves-->
+            
+                <h1 id="header">XDOTDEXTE4.0 </h1>
+                <div id="box">
+                    <p id="creator">A game by Md Akij Islam</p>
+                    <p id="welcome">Welcome to Particles, a game of speed and accuracy.
+                        https://xdotdex.github.io/game</p>
+                    <p id="welcome1">Github@xdotdex</p>
+                    <div id="circles">
+                        <button id="homeHowButton" class="home-buttons" onClick="switchPage('#how');">How</button>
+                        <button id="homePlayButton" class="home-buttons" onClick="switchPage('#game');">Play</button>
+                    </div>
+                </div>
+                
+            </div> <!--home-->
+            <div id="how" class="page"> <!--How page-->
+                <h1>How</h1>
+                <article>
+                    <p class="line line-1">কণাগুলি স্ক্রিনের উপরে যাওয়ার সাথে সাথে আপনাকে তাদের উপর ঘোরাতে হবে।</p>
+                    <p class="line line-2">যখন একটি কণা পূর্ণ আকারে পৌঁছায় তখন আপনাকে এটিতে ক্লিক করতে হবে।</p>
+                    <p class="line line-3">একটি কণার উপর ক্লিক করা আপনাকে এক পয়েন্ট প্রদান করবে এবং আপনার সময়ের সাথে এক সেকেন্ড যোগ করবে।</p>
+                    <p class="line line-4">বিশেষ সোনার কণা রয়েছে যা আপনাকে আরও বেশি পয়েন্ট/সময় প্রদান করে।</p>
+                    <p class="line line-5">শুরু করতে প্লে বোতামে ক্লিক করুন.</p>
+                    <p class="line line-6">https://xdotdex.github.io/game.</p>
+                    <div class="particle-gold"></div>
+                </article>
+                <div class="wolves">
+                    <div class="wolf top-left">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                    <div class="wolf top-right">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                </div> <!--Wolves-->
+                
+            </div> <!--how-->
+            <div id="scores" class="page"> <!--Scores page-->
+                <h1>Scores</h1>
+                <div id="scoresTable"></div>
+                <div class="wolves">
+                    <div class="wolf top-left">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                    <div class="wolf top-right">
+                        <div class="wolf-ear-left"></div>
+                        <div class="wolf-ear-right"></div>
+                        <div class="wolf-head"></div>
+                        <div class="wolf-eye-left"></div>
+                        <div class="wolf-eye-right"></div>
+                        <div class="wolf-eyeball-left"></div>
+                        <div class="wolf-eyeball-right"></div>
+                        <div class="wolf-nose"></div>
+                    </div>
+                </div> <!--Wolves-->
+                
+            </div> <!--scores-->
+            <div id="game" class="page"> <!--game page-->
+                <div id="particle-box"></div>
+                <div id="gameComponents">
+                    <div id="gameTimer"></div>
+                    <div class="game-score">0</div>
+                </div>
+                <div id="gameOver">
+                    <div id="gameScore" class="game-score">0</div>
+                    <div id="gameScoreBest">0</div>
+                    <button id="gameReplayButton" onclick="startGame();">Replay</button>
+                </div>
+                <button id="gameStartButton" onclick="startGame();">Start</button>
+            </div> <!--Game-->
+        </div> <!--Content-->
+
+        
+    
+        <!--jQuery library-->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/dex.js"></script>
+    </body>
+</html>
