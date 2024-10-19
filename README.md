@@ -4,6 +4,7 @@
 >[╰┈➤Follow me Instagram─── ⋆⋅☆⋅⋆ ──](https://www.instagram.com/callmedexter4.0/)
 # Game
 Welcome to Particles, a game of speed and accuracy.
+
  [Play this game](https://xdotdex.github.io/game)
 
  **How to play**
